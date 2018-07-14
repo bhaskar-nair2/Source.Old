@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Source</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<body>
+
+{% set navigation_bar = [
+    ('/', 'index', 'Index'),
+    ('/downloads', 'downloads', 'Downloads')
+] -%}
+{% set active_page = active_page|default('index') -%}
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Source</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav justify-content-end">
+        {% for href, id, caption in navigation_bar %}
+             <li {% if id == active_page %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                 <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+             </li>
+        {% endfor %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Stats
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Documents</a>
+                    <a class="dropdown-item" href="#">Subjects</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item disabled" href="#">Teachers</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#signInModal">Sign-in</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--Modals-->
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Sign-Up / Login</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+
+                    <ul class="nav nav-tabs active" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Sign-Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Login</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <!--SIGNUP-->
+                            <form name="signup" method="post" action="{{ url_for('signup') }}">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend" style="padding-top: 10px">
+                                        <span class="input-group-text" id="Username">Username</span>
+                                    </div>
+                                    <div style="padding-top: 10px">
+                                        <input type="text" class="form-control" aria-label="Username"
+                                               aria-describedby="Username" autocomplete="on" required="required" name="user">
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="Mail">Email-ID</span>
+                                    </div>
+                                    <div>
+                                        <input type="email" class="form-control" aria-label="Mail"
+                                               aria-describedby="Mail" autocomplete="email" required="required" name="mail">
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="pass">Password</span>
+                                    </div>
+                                    <div>
+                                        <input type="email" class="form-control" aria-label="Mail"
+                                               aria-describedby="pass" autocomplete="on" required="required" name="pass">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">SignUp</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                        <!--Login-->
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form name="login" method="post" action="{{ url_for('login') }}">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend" style="padding-top: 10px">
+                                        <span class="input-group-text" id="Username">Username</span>
+                                    </div>
+                                    <div style="padding-top: 10px">
+                                        <input type="text" class="form-control" aria-label="Username"
+                                               aria-describedby="Username" autocomplete="username" required="required" name="user">
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="pass">Password</span>
+                                    </div>
+                                    <div>
+                                        <input type="email" class="form-control" aria-label="Mail"
+                                               aria-describedby="pass" autocomplete="current-password" required="required" name="pass">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid">
+{% block content %}
+
+{% endblock %}
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <script type="text/javascript">
+                alert('{{ message }}');
+            </script>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<!--Scripts-->
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

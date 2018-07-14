@@ -1,0 +1,106 @@
+@font-face {
+    font-family: "Tilez";
+    src: url("../fonts/Tilez.TTF");
+}
+
+@font-face {
+    font-family: "Scramble";
+    src: url("../fonts/Scramble.ttf");
+}
+
+/*GLOBAL ELEMENTS*/
+.navbar-brand {
+    padding: 0;
+    font-family: Scramble;
+    font-size: 2vw;
+}
+
+#canvas{
+ background-color:#000;
+ display:block;
+ margin:auto;
+}
+
+footer {
+    height: 5vh;
+    border-top: 2px solid #cacaca;
+    background-color: #cacaca;
+    text-align: center;
+}
+.sal{
+    padding-top: 1.2vh
+}
+
+.beats{
+    color: #c50000;
+    animation: beat 1.5s ease-in-out infinite;
+}
+@keyframes beat {
+    0%,
+    100%{transform: scale(1)}
+    50%{transform: scale(1.1)}
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 2vw repeat(12, 1fr) 2vw;
+        grid-template-rows: repeat(8, 10vh);
+        grid-gap: 5px;
+    }
+
+}
+
+@media all and (max-width: 700px) {
+
+}
+
+/*LAYOUT-MAIN ELEMENTS*/
+
+/*LAYOUT-HOME ELEMENTS*/
+
+/*INDEX ELEMENTS*/
+.frontPage {
+    z-index: 5;
+    grid-row: 3;
+    grid-column: 6/span 4;
+    text-align: center;
+    justify-content: center;
+}
+
+.Header {
+    font-family: Scramble;
+    padding: 0;
+    font-size: 3vw;
+
+}
+
+.searchHere {
+    height: 5vh;
+    z-index: 6;
+    margin-top: 2.5vh;
+    text-align: start;
+    box-shadow: 0px 6px 12px 1px grey;
+}
+
+.searchHere:hover {
+    box-shadow: 0px 6px 12px 2px grey;
+}
+
+#searchBar {
+    outline: none;
+    width: 29vw;
+    height: 5vh;
+    padding: 0;
+    padding-left: 1vw;
+    border: none;
+}
+
+#searchBar :active :focus {
+    border: none;
+    outline: none;
+}
+
+/*PROFILE ELEMENTS*/
+
+/*LAYOUT-MAIN ELEMENTS*/

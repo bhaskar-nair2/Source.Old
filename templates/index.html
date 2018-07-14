@@ -1,0 +1,18 @@
+{% extends 'layout-main.html' %}
+{% set active_page = "index" %}
+{% block content %}
+
+    <div class="frontPage">
+        <form id="searchForm" action="{{ url_for('search') }}" method="post">
+            <p class="Header">Source</p>
+            <div class="searchHere">
+
+                <input autofocus id="searchBar" placeholder="Search by Subject, Code or Teacher" autocomplete="off">
+
+                <i id="searchIcon" class="fas fa-search"></i>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
