@@ -8,17 +8,27 @@
     src: url("../fonts/Scramble.ttf");
 }
 
+
 /*GLOBAL ELEMENTS*/
+body{
+    font-family: Ubuntu;
+}
 .navbar-brand {
+!important;
     padding: 0;
+    padding-left: 1vw;
     font-family: Scramble;
     font-size: 2vw;
 }
 
-#canvas{
- background-color:#000;
- display:block;
- margin:auto;
+.navbar-brand :hover {
+    text-shadow: 14px 14px 12px whitesmoke !important;
+}
+
+#canvas {
+    background-color: #000;
+    display: block;
+    margin: auto;
 }
 
 footer {
@@ -27,18 +37,28 @@ footer {
     background-color: #cacaca;
     text-align: center;
 }
-.sal{
+
+.sal {
     padding-top: 1.2vh
 }
 
-.beats{
+.nav-link :focus {
+
+}
+
+.beats {
     color: #c50000;
     animation: beat 1.5s ease-in-out infinite;
 }
+
 @keyframes beat {
     0%,
-    100%{transform: scale(1)}
-    50%{transform: scale(1.1)}
+    100% {
+        transform: scale(1)
+    }
+    50% {
+        transform: scale(1.1)
+    }
 }
 
 @media (min-width: 1024px) {
@@ -101,6 +121,136 @@ footer {
     outline: none;
 }
 
+.srchInfo {
+    font-size: 1.5vh;
+    color: #565656;
+    padding-top: 5vh;
+}
+
+.mod {
+    color: cornflowerblue;
+}
+
+/*SUB-PAGE ELEMENTS*/
+.sub-page-top {
+    grid-row: 1/span 3;
+    grid-column: 2/ span 5;
+    margin-top: 4vh;
+    padding-left: 1vw;
+    border-left: solid 5px dimgray;
+    height: fit-content;
+}
+.sub-id{
+    font-family: "Ubuntu Light";
+    font-size: 4vh;
+    color: #6c757d;
+}
+
+.sub-name {
+    font-size: 7vh;
+    font-family: Ubuntu;
+    color: #1b1e21;
+    border-bottom: solid 3px gainsboro;
+}
+
+.redirects{
+    font-family: "Ubuntu Light";
+    color: #6c757d;
+}
+.re-code{
+    font-family: Ubuntu;
+    color: #1b1e21;
+}
+.bundles {
+    grid-row: 5/span 6;
+    grid-column: 1/ 12;
+    display: grid;
+    height: fit-content;
+    grid-template-rows: [title]auto [cards]auto;
+    margin-bottom: 10vh;
+}
+.card-holder-title{
+    grid-row: title;
+    margin-left: 3vw;
+    font-size: 3vh;
+    font-family: Ubuntu;
+    color: #5d6d71;
+    margin-bottom: 2vh;
+    border-bottom: 4px solid #9b9b9b;
+    width: fit-content;
+    padding-right: 0.5vw;
+}
+.rep{
+    color: #00a400;
+
+}
+.fa-1x{
+    height: 1.5vh;
+}
+.fa-2x{
+    height: 2vh;
+}
+.fa-thumbs-up{
+    color: #00a400;
+}
+.fa-thumbs-down{
+    color: red;
+}
+.card-holder{
+    grid-row: cards;
+    margin-left: 4vw;
+    display: grid;
+    grid-gap: 0.7vw;
+    grid-template-columns: repeat(auto-fill,16vw);
+}
+.card-title{
+    color: #1b1e21;
+    font-family: "Ubuntu Light";
+
+}
+.card-text{
+    color: #6c757d;
+    font-family: Ubuntu;
+}
+.files {
+    grid-row: 13/span 6;
+    grid-column: 1/ 12;
+    display: grid;
+    height: fit-content;
+    grid-template-rows: [title]auto [cards]auto;
+    margin-bottom: 10vh;
+}
+
+.videos{
+    grid-row: 2/span all;
+    grid-column: 11/ span all;
+    border-left: 3px solid dimgray;
+    display: grid;
+    grid-template-rows: [title]auto [content]auto;
+}
+.videoHead{
+    grid-row: title;
+    font-family: Ubuntu;
+    margin-left: 1vw;
+    padding-right: 0.5vw;
+    font-size: 3vh;
+    color: #5d6d71;
+    border-bottom: 4px solid #9b9b9b;
+    height: fit-content;
+    width: fit-content;
+}
 /*PROFILE ELEMENTS*/
 
-/*LAYOUT-MAIN ELEMENTS*/
+/*ERROR ELEMENTS*/
+.errText {
+    color: #4e555b;
+    grid-row: 3;
+
+    grid-column: 6/span 4;
+}
+
+.error {
+    color: cornflowerblue !important;
+    font-size: 6vw;
+    font-style: unset;
+}

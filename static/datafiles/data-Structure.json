@@ -1,0 +1,77 @@
+{
+"subjects":[
+  {
+  "sub_name":"",
+  "sub_code":"",
+  "department":"",
+  "redirect_codes":[
+    "1C23",
+    "1B23",
+    "1A23"
+  ],
+  "teachers":[
+    "xyz",
+    "abc",
+    "pqr"
+  ],
+  "bundles":[
+    { "bundle_id":"",
+      "bundle_name":"",
+      "author":"uname"
+      "bundle_link":"",
+      "bundle_rating":""
+    }
+  ],
+  "files":[
+    {
+      "filename":"",
+      "author":"uname",
+      "format":"",
+      "file_link":""
+    }
+  ],
+  "video_links":[
+    "link",
+    "link",
+    "link"
+  ]
+
+},
+{
+  "sub_name":"",
+  "sub_code":"",
+  "department":"",
+  "redirect_codes":[
+    "1C23",
+    "1B23",
+    "1A23"
+  ],
+  "teachers":[
+    "xyz",
+    "abc",
+    "pqr"
+  ],
+  "bundles":[
+    { "bundle_id":"",
+      "bundle_name":"",
+      "author":"uname"
+      "bundle_link":"",
+      "bundle_rating":""
+    }
+  ],
+  "files":[
+    {
+      "filename":"",
+      "author":"uname",
+      "format":"",
+      "file_link":""
+    }
+  ],
+  "video_links":[
+    "link",
+    "link",
+    "link"
+  ]
+
+}]
+}

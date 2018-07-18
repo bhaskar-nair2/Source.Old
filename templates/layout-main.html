@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Source</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script src="{{ url_for('static',filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap4/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/all.css') }}">
     <link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
 </head>
@@ -14,12 +13,13 @@
 {% set navigation_bar = [
     ('/', 'index', 'Search'),
     ('/downloads', 'downloads', 'Downloads'),
+    ('/pages','subjects','Subjects'),
     ('/stats', 'stats', 'Stats')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">S</a>
+    <a class="navbar-brand" href="{{ url_for('index') }}">S</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,11 +27,11 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav justify-content-end">
-        {% for href, id, caption in navigation_bar %}
-             <li {% if id == active_page %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-                 <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
-             </li>
-        {% endfor %}
+            {% for href, id, caption in navigation_bar %}
+                <li {% if id == active_page %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                </li>
+            {% endfor %}
 
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#signInModal">Sign-in</a>
@@ -41,7 +41,8 @@
 </nav>
 
 <!--Modals-->
-<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -75,7 +76,8 @@
                                     </div>
                                     <div style="padding-top: 10px">
                                         <input type="text" class="form-control" aria-label="Username"
-                                               aria-describedby="Username" autocomplete="on" required="required" name="user">
+                                               aria-describedby="Username" autocomplete="on" required="required"
+                                               name="signup-user">
                                     </div>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
@@ -84,7 +86,8 @@
                                     </div>
                                     <div>
                                         <input type="email" class="form-control" aria-label="Mail"
-                                               aria-describedby="Mail" autocomplete="email" required="required" name="mail">
+                                               aria-describedby="Mail" autocomplete="email" required="required"
+                                               name="signup-mail">
                                     </div>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
@@ -93,7 +96,8 @@
                                     </div>
                                     <div>
                                         <input type="email" class="form-control" aria-label="Mail"
-                                               aria-describedby="pass" autocomplete="on" required="required" name="pass">
+                                               aria-describedby="pass" autocomplete="on" required="required"
+                                               name="signup-pass">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">SignUp</button>
@@ -109,7 +113,8 @@
                                     </div>
                                     <div style="padding-top: 10px">
                                         <input type="text" class="form-control" aria-label="Username"
-                                               aria-describedby="Username" autocomplete="username" required="required" name="user">
+                                               aria-describedby="Username" autocomplete="username" required="required"
+                                               name="login-user">
                                     </div>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
@@ -118,7 +123,8 @@
                                     </div>
                                     <div>
                                         <input type="email" class="form-control" aria-label="Mail"
-                                               aria-describedby="pass" autocomplete="current-password" required="required" name="pass">
+                                               aria-describedby="pass" autocomplete="current-password"
+                                               required="required" name="login-pass">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
@@ -137,15 +143,23 @@
 </div>
 
 <div class="grid">
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
 </div>
-<footer class="fixed-bottom">
-    <div class="sal">
-    Made with <i class="fas fa-heart beats"></i> using Flask
-    </div>
-</footer>
+{% if active_page=='index' or active_page == 'error' %}
+    <footer class="fixed-bottom">
+        <div class="sal">
+            Made with <i class="fas fa-heart beats"></i> using Flask
+        </div>
+    </footer>
+{% else %}
+    <footer class="fixed-bottom">
+        <div class="sal">
+            BStark.Tech<sup><i class="fa fa-copyright "></i></sup>
+        </div>
+    </footer>
+{% endif %}
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -159,16 +173,11 @@
 
 <!--Scripts-->
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='font-awesome/js/all.js') }}"></script>
+<script src="{{ url_for('static', filename='bootstrap4/js/bootstrap.bundle.js') }}"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
+{#        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
+{#        crossorigin="anonymous"></script>#}
 </body>
 </html>

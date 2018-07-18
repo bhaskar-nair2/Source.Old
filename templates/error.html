@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% if session['user'] %}
+    {% extends 'layout-loggedin.html' %}
+{% else %}
+    {% extends 'layout-main.html' %}
+{% endif %}
+{% set active_page = "error" %}
+{% block content %}
+
+    <p class="errText">The Bird You were Searching For has Flown Away....<br><i class="error">Error: 404</i></p>
+
+{% endblock %}
