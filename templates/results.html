@@ -1,9 +1,55 @@
-{% if session['user'] %}
-    {% extends 'layout-loggedin.html' %}
-{% else %}
-    {% extends 'layout-main.html' %}
-{% endif %}
-{% set active_page = "index" %}
-{% block content %}
+<html>
+<head>
 
-{% endblock %}
+     <link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
+</head>
+<body>
+<form name="login" method="post">
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend" style="padding-top: 10px">
+            <span class="input-group-text" id="Username">Username</span>
+        </div>
+        <div style="padding-top: 10px">
+            <input type="text" class="form-control" aria-label="Username"
+                   aria-describedby="Username" autocomplete="username" required="required"
+                   name="login-user" onblur="NameCheck(this.value)">
+        </div>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="pass">Password</span>
+        </div>
+        <div>
+            <input type="password" class="form-control" aria-label="Password"
+                   aria-describedby="pass" autocomplete="current-password"
+                   required="required" name="login-pass">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+</form>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+
+{#TESTING SCRIPTS!!#}
+<script src="{{ url_for('static', filename='js/socket-1.slim.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" charset="UTF-8">
+        let socket = io.connect();
+        socket.on('connect' ,function () {
+            socket.emit('my_event', {data: 'I\'m Connected!!'});
+        });
+</script>
+<script type="text/javascript">
+    function NameCheck(data) {
+        let sock = io.connect(document.domain+':'+location.port);
+        sock.emit('name_check',data);
+        console.log('HERE-2');
+        sock.on('responded', function (msg) {
+            console.log(msg);
+        })
+    }
+</script>
+
+
+</body>
+</html>

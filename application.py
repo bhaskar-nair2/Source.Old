@@ -1,11 +1,11 @@
 from flask import Flask, render_template, session, request, flash
 from passhash import Hasher
-from flask_pymongo import PyMongo
+from mongoslave import MongoConnect
 
 application = Flask(__name__)
 application.secret_key = b"\xd0\t\xc4#lM`2;c\x14T3^\x02\xd7y\x81wYouKnowWhat?JustFuckOff"
 application.config.from_pyfile('config.cfg')
-
+Mongo=MongoConnect(application)
 
 @application.route('/')
 @application.route('/<username>')
@@ -41,12 +41,17 @@ def page(pageID=None):
 @application.route('/signup', methods=['POST'])
 def signup():
     x = Hasher.build(request.form['signup-user'], request.form['signup-pass'], application.secret_key)
+    Mongo.insert('source-credentials',{"x":1})
     return 'Signed Up'
 
 
 @application.route('/login', methods=['POST'])
 def login():
     return 'Logged In'
+
+@application.route('/namecheck', methods=['POST'])
+def check():
+    return True
 
 
 @application.errorhandler(404)

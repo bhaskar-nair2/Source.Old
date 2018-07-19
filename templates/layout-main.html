@@ -77,7 +77,7 @@
                                     <div style="padding-top: 10px">
                                         <input type="text" class="form-control" aria-label="Username"
                                                aria-describedby="Username" autocomplete="on" required="required"
-                                               name="signup-user">
+                                               name="signup-user" onblur="Check(this.value)">
                                     </div>
                                 </div>
                                 <div class="input-group input-group-sm mb-3">
@@ -95,7 +95,7 @@
                                         <span class="input-group-text" id="pass">Password</span>
                                     </div>
                                     <div>
-                                        <input type="email" class="form-control" aria-label="Mail"
+                                        <input type="password" class="form-control" aria-label="Password"
                                                aria-describedby="pass" autocomplete="on" required="required"
                                                name="signup-pass">
                                     </div>
@@ -122,7 +122,7 @@
                                         <span class="input-group-text" id="pass">Password</span>
                                     </div>
                                     <div>
-                                        <input type="email" class="form-control" aria-label="Mail"
+                                        <input type="password" class="form-control" aria-label="Password"
                                                aria-describedby="pass" autocomplete="current-password"
                                                required="required" name="login-pass">
                                     </div>
@@ -175,7 +175,25 @@
 
 <script src="{{ url_for('static', filename='font-awesome/js/all.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap4/js/bootstrap.bundle.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+<script>
+    function Check(value) {
+        if(CheckName(value)){
+            console.log('checked')
+        }
+    }
+</script>
+
+{#TESTING SCRIPTS!!#}
+<script type="{{ url_for('static', filename='js/socket-1.js') }}"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    });
+</script>
+
 {#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
 {#        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
 {#        crossorigin="anonymous"></script>#}

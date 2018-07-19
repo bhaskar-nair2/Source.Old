@@ -61,7 +61,7 @@ footer {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     .grid {
         display: grid;
         grid-template-columns: 2vw repeat(12, 1fr) 2vw;
@@ -206,7 +206,6 @@ footer {
 .card-title{
     color: #1b1e21;
     font-family: "Ubuntu Light";
-
 }
 .card-text{
     color: #6c757d;
@@ -227,6 +226,7 @@ footer {
     border-left: 3px solid dimgray;
     display: grid;
     grid-template-rows: [title]auto [content]auto;
+    height: fit-content;
 }
 .videoHead{
     grid-row: title;
@@ -238,6 +238,16 @@ footer {
     border-bottom: 4px solid #9b9b9b;
     height: fit-content;
     width: fit-content;
+}
+.embedded{
+    grid-row: content;
+    display: grid;
+    grid-gap: 2vh;
+    grid-template-rows: repeat(auto-fill,15vh);
+    margin-left: 3vw;
+}
+.embededVideo{
+    width: 7vw;
 }
 /*PROFILE ELEMENTS*/
 
