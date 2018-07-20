@@ -1,8 +1,9 @@
-{% if session['user'] %}
-    {% extends 'layout-loggedin.html' %}
-{% else %}
-    {% extends 'layout-main.html' %}
-{% endif %}
+{#{% if session['user'] %}#}
+{#    {% extends 'layout-loggedin.html' %}#}
+{#{% else %}#}
+{#    {% extends 'layout-main.html' %}#}
+{#{% endif %}#}
+{% extends 'layout-main.html' %}
 {% set active_page = "index" %}
 {% block content %}
 
@@ -11,13 +12,13 @@
             <p class="Header">Source</p>
             <div class="searchHere">
 
-                <input id="searchBar" placeholder="Search by Subject, Code or Teacher" autocomplete="off"
+                <input id="searchBar" placeholder="Search by Subject, Code, Teacher or File" autocomplete="off"
                        data-toggle="list">
 
                 <i id="searchIcon" class="fas fa-search"></i>
             </div>
         </form>
-        <p class="srchInfo">Please prefix <i class="mod">:Sub:</i>, <i class="mod">:Code:</i> or <i class="mod">:Teach:</i> for better results</p>
+        <p class="srchInfo">Please prefix <i class="mod">:sub:</i>, <i class="mod">:code:</i>, <i class="mod">:teach:</i>  or <i class="mod">:file:</i> for better results</p>
     </div>
 
 {% endblock %}

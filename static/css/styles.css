@@ -96,6 +96,7 @@ footer {
 }
 
 .searchHere {
+    width: 31.65vw;
     height: 5vh;
     z-index: 6;
     margin-top: 2.5vh;
@@ -129,6 +130,22 @@ footer {
 
 .mod {
     color: cornflowerblue;
+}
+
+#rejectIC{
+    wrap-option: avoid;
+    display: none;
+    color: red;
+    align-items: center;
+    padding-left: 1vw;
+    font-size: 1.2vh;
+    font-style: italic;
+}
+#acceptIC{
+    display: none;
+    align-items: center;
+    padding-left: 1vw;
+    color: #00a400;
 }
 
 /*SUB-PAGE ELEMENTS*/

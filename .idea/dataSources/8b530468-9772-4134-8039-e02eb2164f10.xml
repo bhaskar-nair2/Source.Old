@@ -92,41 +92,55 @@
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_subjects_1</UnderlyingIndexName>
     </key>
-    <column id="27" parent="9" name="uname">
+    <column id="27" parent="9" name="id">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="28" parent="9" name="rep">
+    <column id="28" parent="9" name="uname">
       <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="29" parent="9" name="rep">
+      <Position>3</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="29" parent="9" name="special_num">
-      <Position>3</Position>
+    <column id="30" parent="9" name="special_num">
+      <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="30" parent="9" name="pass">
-      <Position>4</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="31" parent="9" name="email">
+    <column id="31" parent="9" name="pass">
       <Position>5</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="32" parent="9" name="file_count">
+    <column id="32" parent="9" name="email">
       <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="33" parent="9" name="file_count">
+      <Position>7</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="33" parent="9" name="sqlite_autoindex_users_1">
+    <index id="34" parent="9" name="sqlite_autoindex_users_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <index id="35" parent="9" name="sqlite_autoindex_users_2">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uname</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="34" parent="9">
+    <key id="36" parent="9">
       <ColNames>uname</ColNames>
       <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_users_2</UnderlyingIndexName>
+    </key>
+    <key id="37" parent="9">
+      <ColNames>id</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>
     </key>
   </database-model>

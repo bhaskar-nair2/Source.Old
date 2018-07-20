@@ -1,30 +1,35 @@
-from flask import Flask, render_template, session, request, flash
+from flask import Flask, render_template, session, request, flash, jsonify
+from flask_socketio import SocketIO
 from passhash import Hasher
 from mongoslave import MongoConnect
 
-application = Flask(__name__)
-application.secret_key = b"\xd0\t\xc4#lM`2;c\x14T3^\x02\xd7y\x81wYouKnowWhat?JustFuckOff"
-application.config.from_pyfile('config.cfg')
-Mongo=MongoConnect(application)
+app = Flask(__name__)
+app.secret_key = b"de$Tps%qPQ@345jDkoMOuYouKnowWhat?JustFuckOff"
+app.config.from_pyfile('config.cfg')
+Mongo = MongoConnect(app)
+socketio = SocketIO(app)
+socketio.init_app(app)
 
-@application.route('/')
-@application.route('/<username>')
+
+# ROUTE HANDLERS
+@app.route('/')
+@app.route('/<username>')
 def index(username=None):
-    return render_template('index.html')
+    return render_template('index.html', user=username)
 
 
-@application.route('/search', methods=['POST'])
+@app.route('/search', methods=['POST'])
 def search():
     return render_template('results.html')
 
 
-@application.route('/downloads')
-@application.route('/downloads/<username>')
+@app.route('/downloads')
+@app.route('/downloads/<username>')
 def downloads(username=None):
-    return render_template('downloads.html')
+    return render_template('downloads.html', user=username)
 
 
-@application.route("/uploads/<username>", methods=['GET', 'POST'])
+@app.route("/uploads/<username>", methods=['GET', 'POST'])
 def upload(username):
     if request.method == 'POST':
         return 'POST: uploads'
@@ -32,37 +37,64 @@ def upload(username):
         return "GET: uploads"
 
 
-@application.route("/pages")
-@application.route("/pages/<pageID>")
+@app.route("/pages")
+@app.route("/pages/<pageID>")
 def page(pageID=None):
-    return render_template('sub-page.html',pageID=pageID)
+    return render_template('sub-page.html', pageID=pageID)
 
 
-@application.route('/signup', methods=['POST'])
-def signup():
-    x = Hasher.build(request.form['signup-user'], request.form['signup-pass'], application.secret_key)
-    Mongo.insert('source-credentials',{"x":1})
-    return 'Signed Up'
-
-
-@application.route('/login', methods=['POST'])
-def login():
-    return 'Logged In'
-
-@application.route('/namecheck', methods=['POST'])
+@app.route('/namecheck', methods=['POST'])
 def check():
     return True
 
 
-@application.errorhandler(404)
+# SOCKET HANDLERS
+@socketio.on('signup')
+def signup(data):
+    if Mongo.checkUser(data[0]):
+        # try:
+        x = Hasher.build(data[0], data[2], app.secret_key)
+        Mongo.insert('source_credentials', jsonify(user= x[0], password= x[1], mail= data[1]))
+        session['user'] = x[0]
+        return socketio.emit('signedup', jsonify(bool=True, msg='Signed-Up'), json=True)
+    else:
+        return socketio.emit('signedup', jsonify(bool= False, msg= 'Username Taken'), json=True)
+
+
+@socketio.on('login')
+def login(data):
+    print('1')
+    re = Mongo.getUser(data[0])
+    if re:
+        if Hasher.retrive(app.secret_key, data[0], data[1], re[1]):
+            session['user'] = data[0]
+            return socketio.emit('loggedin', {'bool': True, 'msg': 'Login Successful'}, json=True)
+        else:
+            return socketio.emit('loggedin', {'bool': False, 'msg': 'Data Seems to be invalid'}, json=True)
+    else:
+        return socketio.emit('loggedin', {'bool': False, 'msg': 'Data Seems to be invalid'}, json=True)
+
+
+@socketio.on('init')
+def handle_my_custom_event(json):
+    print('received json: ' + str(json))
+
+
+@socketio.on('name_check')
+def handle_name(data):
+    socketio.emit('responded', Mongo.checkUser(data))
+
+
+# ERROR HANDLERS
+@app.errorhandler(404)
 def er404(e):
     return render_template('error.html', error='404')
 
 
-@application.errorhandler(500)
+@app.errorhandler(500)
 def er500(e):
     return render_template('error.html', error='500')
 
 
 if __name__ == '__main__':
-    application.run()
+    app.run()

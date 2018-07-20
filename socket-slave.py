@@ -9,7 +9,7 @@ socketio.init_app(app)
 
 @app.route('/')
 def index():
-    return render_template('results.html')
+    return render_template('index.html')
 
 
 @socketio.on('my_event')
