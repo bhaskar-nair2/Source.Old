@@ -32,7 +32,6 @@
     <index id="13" parent="6" name="sqlite_autoindex_bundle_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>bundle_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="14" parent="6">
@@ -84,7 +83,6 @@
     <index id="25" parent="8" name="sqlite_autoindex_subjects_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sub_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="26" parent="8">
@@ -125,13 +123,11 @@
     <index id="34" parent="9" name="sqlite_autoindex_users_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="35" parent="9" name="sqlite_autoindex_users_2">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uname</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="36" parent="9">

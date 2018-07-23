@@ -10,15 +10,21 @@
     <div class="frontPage">
         <form id="searchForm" action="{{ url_for('search') }}" method="post">
             <p class="Header">Source</p>
-            <div class="searchHere">
+            <div class="searchHere ui-widget">
 
-                <input id="searchBar" placeholder="Search by Subject, Code, Teacher or File" autocomplete="off"
-                       data-toggle="list">
+                <input type="text" class="ui-autocomplete " id="searchBar" placeholder="Search by Subject, Code, Teacher or File" autocomplete="off"
+                       data-toggle="list" value = "" autofocus>
 
                 <i id="searchIcon" class="fas fa-search"></i>
             </div>
         </form>
-        <p class="srchInfo">Please prefix <i class="mod">:sub:</i>, <i class="mod">:code:</i>, <i class="mod">:teach:</i>  or <i class="mod">:file:</i> for better results</p>
+        <div id="searchOpL" class="searchOption collapse">
+
+        </div>
+        <p class="srchInfo">Please prefix <i class="mod">:sub:</i>, <i class="mod">:code:</i>, <i
+                class="mod">:teach:</i> or <i class="mod">:file:</i> for better results</p>
     </div>
 
 {% endblock %}
+
+<input class="form-control bs-autocomplete" id="ac-demo" value="" placeholder="Type two characters of a city name..." type="text" data-source="demo_source.php" data-hidden_field_id="city-code" data-item_id="id" data-item_label="cityName" autocomplete="off">

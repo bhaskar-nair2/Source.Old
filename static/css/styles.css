@@ -8,11 +8,11 @@
     src: url("../fonts/Scramble.ttf");
 }
 
-
 /*GLOBAL ELEMENTS*/
-body{
+body {
     font-family: Ubuntu;
 }
+
 .navbar-brand {
 !important;
     padding: 0;
@@ -76,6 +76,22 @@ footer {
 }
 
 /*LAYOUT-MAIN ELEMENTS*/
+#rejectIC {
+    wrap-option: avoid;
+    display: none;
+    color: red;
+    align-items: center;
+    padding-left: 1vw;
+    font-size: 1.2vh;
+    font-style: italic;
+}
+
+#acceptIC {
+    display: none;
+    align-items: center;
+    padding-left: 1vw;
+    color: #00a400;
+}
 
 /*LAYOUT-HOME ELEMENTS*/
 
@@ -115,6 +131,9 @@ footer {
     padding: 0;
     padding-left: 1vw;
     border: none;
+    position: inherit;
+    top: inherit;
+    left: inherit;
 }
 
 #searchBar :active :focus {
@@ -132,20 +151,52 @@ footer {
     color: cornflowerblue;
 }
 
-#rejectIC{
-    wrap-option: avoid;
-    display: none;
-    color: red;
-    align-items: center;
-    padding-left: 1vw;
-    font-size: 1.2vh;
-    font-style: italic;
+.fa-spinner {
+    animation: 1s infinite linear rot;
 }
-#acceptIC{
-    display: none;
-    align-items: center;
+
+@keyframes rot {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+ul.ui-autocomplete {
     padding-left: 1vw;
-    color: #00a400;
+    grid-row: 4;
+    grid-column: 6;
+    text-align: start;
+    width: 29vw;
+    border-top: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.4);
+}
+
+ul.ui-autocomplete a {
+    font-weight: normal;
+    color: #333333;
+}
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    padding: 0;
+    width: 1px;
+}
+
+.ui-state-active,
+.ui-state-focus {
+    color: #23527c;
+    background-color: #eeeeee;
 }
 
 /*SUB-PAGE ELEMENTS*/
@@ -157,7 +208,8 @@ footer {
     border-left: solid 5px dimgray;
     height: fit-content;
 }
-.sub-id{
+
+.sub-id {
     font-family: "Ubuntu Light";
     font-size: 4vh;
     color: #6c757d;
@@ -170,23 +222,26 @@ footer {
     border-bottom: solid 3px gainsboro;
 }
 
-.redirects{
+.redirects {
     font-family: "Ubuntu Light";
     color: #6c757d;
 }
-.re-code{
+
+.re-code {
     font-family: Ubuntu;
     color: #1b1e21;
 }
+
 .bundles {
     grid-row: 5/span 6;
     grid-column: 1/ 12;
     display: grid;
     height: fit-content;
-    grid-template-rows: [title]auto [cards]auto;
+    grid-template-rows: [title] auto [cards] auto;
     margin-bottom: 10vh;
 }
-.card-holder-title{
+
+.card-holder-title {
     grid-row: title;
     margin-left: 3vw;
     font-size: 3vh;
@@ -197,55 +252,65 @@ footer {
     width: fit-content;
     padding-right: 0.5vw;
 }
-.rep{
+
+.rep {
     color: #00a400;
 
 }
-.fa-1x{
+
+.fa-1x {
     height: 1.5vh;
 }
-.fa-2x{
+
+.fa-2x {
     height: 2vh;
 }
-.fa-thumbs-up{
+
+.fa-thumbs-up {
     color: #00a400;
 }
-.fa-thumbs-down{
+
+.fa-thumbs-down {
     color: red;
 }
-.card-holder{
+
+.card-holder {
     grid-row: cards;
     margin-left: 4vw;
     display: grid;
     grid-gap: 0.7vw;
-    grid-template-columns: repeat(auto-fill,16vw);
+    grid-template-columns: repeat(auto-fill, 16vw);
 }
-.card-title{
+
+.card-title {
     color: #1b1e21;
     font-family: "Ubuntu Light";
 }
-.card-text{
+
+.card-text {
     color: #6c757d;
     font-family: Ubuntu;
 }
+
 .files {
     grid-row: 13/span 6;
     grid-column: 1/ 12;
     display: grid;
     height: fit-content;
-    grid-template-rows: [title]auto [cards]auto;
+    grid-template-rows: [title] auto [cards] auto;
     margin-bottom: 10vh;
 }
 
-.videos{
-    grid-row: 2/span all;
-    grid-column: 11/ span all;
+.videos {
+    grid-row: 5;
+    grid-column: 12/ span all;
     border-left: 3px solid dimgray;
     display: grid;
-    grid-template-rows: [title]auto [content]auto;
+    grid-template-rows: [title] auto [content] auto;
     height: fit-content;
 }
-.videoHead{
+
+.videoHead {
     grid-row: title;
     font-family: Ubuntu;
     margin-left: 1vw;
@@ -256,16 +321,19 @@ footer {
     height: fit-content;
     width: fit-content;
 }
-.embedded{
+
+.embedded {
     grid-row: content;
     display: grid;
     grid-gap: 2vh;
-    grid-template-rows: repeat(auto-fill,15vh);
+    grid-template-rows: repeat(auto-fill, 15vh);
     margin-left: 3vw;
 }
-.embededVideo{
+
+.embededVideo {
     width: 7vw;
 }
+
 /*PROFILE ELEMENTS*/
 
 /*ERROR ELEMENTS*/

@@ -15,7 +15,7 @@ class MongoConnect:
         rs = client.insert_one(data).inserted_id
         try:
             self.sql.userInsert(rs, data['user'], data['password'], data['mail'])
-        except sqlslave.sql.OperationalError:
+        except sqlslave.sql.OperationalError:  # TODO add handler for these errors!!
             logWrite('Insert to SQL failed by MongoConnect.insert')
             pass
 
@@ -34,6 +34,9 @@ class MongoConnect:
             return re
         else:
             return False
+
+
+x = "streak"
 
 
 class MongoFiles():

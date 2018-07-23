@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Source</title>
-    <script src="{{ url_for('static',filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='jQueryUi/jquery-ui-1.12.1.custom/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap4/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/all.css') }}">
     <link rel="icon" href="{{ url_for('static',filename='img/favicon.ico') }}">
@@ -107,7 +107,9 @@
                                                name="signup-pass" id="signup-pass">
                                     </div>
                                 </div>
-                                <button id="signup-button" type="button" class="btn btn-primary" onclick="signUP()">SignUp</button>
+                                <button id="signup-button" type="button" class="btn btn-primary" onclick="signUP()">
+                                    SignUp
+                                </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             </form>
                         </div>
@@ -179,9 +181,11 @@
 {% endwith %}
 
 <!--Scripts-->
-<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+{#<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>#}
 <script src="{{ url_for('static', filename='font-awesome/js/all.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap4/js/bootstrap.bundle.js') }}"></script>
+<script src="{{ url_for('static', filename='jQueryUi/jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
 <script src="{{ url_for('static', filename='js/socket-1.slim.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript" charset="UTF-8">
     let socket = io.connect();

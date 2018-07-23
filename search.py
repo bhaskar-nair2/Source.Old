@@ -1,6 +1,7 @@
 import datetime
+import time
 import re
-import sqlite3 as sql
+from sqlslave import SQLConnect
 
 t1 = "Maths"
 t2 = "15SE201J"
@@ -17,10 +18,14 @@ class Search:
         self.cleanIt()
         self.cat = self.catIt
 
-
     def search(self):
-        con=sql.connect()
-
+        # TODO:Make sure you only give 8 items as it fucks with the design otherwise
+        con=sql.connect('')
+        time.sleep(3)
+        data = {1: 'hahaha', 2: 'jajajaja', 3: 'kakakaka', 4: 'lololo', 5: 'nanaoonnaa',
+                6: 'sjblhasbc lahbcoewfhbi adabhcspiha c', 7: 'hebsc zxfwevbcdahixnjwibefhaj xz',
+                8: 'wlehfbhklwefvklhevhklaevhhiqiyhfvivi'}
+        return data
 
     def cleanIt(self):
         ter = self.term
