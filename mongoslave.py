@@ -1,7 +1,11 @@
 from flask_pymongo import PyMongo
+import json
 import datetime
 import sqlslave
 
+
+# db = source-data
+# collections = [source_credentials, ]
 
 class MongoConnect:
     def __init__(self, app):
@@ -10,8 +14,8 @@ class MongoConnect:
         self.mongo = PyMongo(self.app, self.URI, )
         self.sql = sqlslave.SQLConnect()
 
-    def insert(self, collection, data):
-        client = self.mongo.db[collection]
+    def addUser(self, data):
+        client = self.mongo.db['source_credentials']
         rs = client.insert_one(data).inserted_id
         try:
             self.sql.userInsert(rs, data['user'], data['password'], data['mail'])
@@ -35,15 +39,11 @@ class MongoConnect:
         else:
             return False
 
+    def addSub(self, item):
+        client = self.mongo.db['subjects']
+        client.insert_one(item)
 
-x = "streak"
-
-
-class MongoFiles():
-    def f1(self):
-        pass
-
-
-def logWrite(e):
-    logFile = open('./static/datafiles/log.txt', 'a')
-    logFile.write(str(datetime.datetime.today()) + "- " + e + "\n")
+    def subdesc(self, item):
+        client = self.mongo.db['subjects']
+        re = client.find_one({"sub_id": item})
+        return re

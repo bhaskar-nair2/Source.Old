@@ -8,6 +8,21 @@
     src: url("../fonts/Scramble.ttf");
 }
 
+@font-face {
+    font-family: Ubuntu;
+    src: url("../fonts/Ubuntu-M.ttf");
+}
+
+@font-face {
+    font-family: Ubuntu-L;
+    src: url("../fonts/Ubuntu-R.ttf");
+}
+
+@font-face {
+    font-family: "Scramble";
+    src: url("../fonts/Scramble.ttf");
+}
+
 /*GLOBAL ELEMENTS*/
 body {
     font-family: Ubuntu;
@@ -23,6 +38,9 @@ body {
 
 .navbar-brand :hover {
     text-shadow: 14px 14px 12px whitesmoke !important;
+}
+.nav-link{
+    font-family: Ubuntu-L;
 }
 
 #canvas {
@@ -112,6 +130,7 @@ footer {
 }
 
 .searchHere {
+    font-family: Ubuntu-L;
     width: 31.65vw;
     height: 5vh;
     z-index: 6;
@@ -165,6 +184,7 @@ footer {
 }
 
 ul.ui-autocomplete {
+    font-family: Ubuntu-L;
     padding-left: 1vw;
     grid-row: 4;
     grid-column: 6;
@@ -199,6 +219,57 @@ ul.ui-autocomplete a {
     background-color: #eeeeee;
 }
 
+/*SUB-LIST-PAGE ELEMENTS*/
+
+.sub-list-top {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.sub-list-title {
+    font-family: Ubuntu;
+    font-size: 8vh;
+
+}
+
+.sub-list-items {
+    grid-row: 2/span all;
+    grid-column: 2/span all;
+    grid-gap: 1vh;
+    display: grid;
+    margin-left: 4vw;
+    grid-template-columns: repeat(auto-fill, 15vw);
+    margin-bottom: 8vh;
+}
+
+.sub-list-item {
+    height: fit-content;
+    width: fit-content;
+    border-left: #23527c solid 8px;
+    padding-left: 1vw;
+    border-bottom: 2px solid lightslategrey;
+    text-wrap: avoid;
+}
+
+.sub-item-head {
+    font-size: 2.5rem;
+    font-family: Ubuntu;
+    color: #6c6c6c;
+}
+
+.sub-item-head:hover {
+    font-size: 2.5rem;
+    font-family: Ubuntu;
+    color: #2a2a2a;
+    text-decoration: none;
+}
+
+
+.sub-list-dept {
+    font-family: Ubuntu-L;
+    color: #a5a5a5;
+}
+
 /*SUB-PAGE ELEMENTS*/
 .sub-page-top {
     grid-row: 1/span 3;
@@ -210,7 +281,7 @@ ul.ui-autocomplete a {
 }
 
 .sub-id {
-    font-family: "Ubuntu Light";
+    font-family: Ubuntu-L;
     font-size: 4vh;
     color: #6c757d;
 }
@@ -223,7 +294,7 @@ ul.ui-autocomplete a {
 }
 
 .redirects {
-    font-family: "Ubuntu Light";
+    font-family: Ubuntu-L;
     color: #6c757d;
 }
 
@@ -267,7 +338,7 @@ ul.ui-autocomplete a {
 }
 
 .fa-thumbs-up {
-    color: #00a400;
+    color: #009e00;
 }
 
 .fa-thumbs-down {
@@ -284,7 +355,7 @@ ul.ui-autocomplete a {
 
 .card-title {
     color: #1b1e21;
-    font-family: "Ubuntu Light";
+    font-family: Ubuntu-L;
 }
 
 .card-text {
@@ -327,11 +398,11 @@ ul.ui-autocomplete a {
     display: grid;
     grid-gap: 2vh;
     grid-template-rows: repeat(auto-fill, 15vh);
-    margin-left: 3vw;
+    margin-left: 2.5vw;
 }
 
 .embededVideo {
-    width: 7vw;
+    width: 13vw;
 }
 
 /*PROFILE ELEMENTS*/

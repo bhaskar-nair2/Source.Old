@@ -1,7 +1,7 @@
-from flask import Flask, render_template, session, request, flash, jsonify
+from flask import Flask, render_template, session, request, flash, jsonify, redirect, url_for
 from flask_socketio import SocketIO, emit
 from passhash import Hasher
-from mongoslave import MongoConnect
+from slaves import MongoConnect, SQLConnect
 from search import Search
 
 app = Flask(__name__)
@@ -10,6 +10,7 @@ app.config.from_pyfile('config.cfg')
 Mongo = MongoConnect(app)
 socketio = SocketIO(app)
 socketio.init_app(app)
+SQL = SQLConnect()
 
 
 # ROUTE HANDLERS
@@ -27,6 +28,17 @@ def search():
 @app.route('/downloads')
 @app.route('/downloads/<username>')
 def downloads(username=None):
+    SQLItem = ('Machine Learning', 'CS103', 'SWE')
+    id = SQL.addSub(SQLItem)
+    MongoItem = {'sub_id': id, 'sub_name': 'Machine Learning', 'sub_code': 'CS103', 'department': 'SWE',
+                 'redirect_codes': ['12CS103', '13CS102'], 'teachers': ['Sunita', 'Punita', 'Chunita'],
+                 'bundles': [{'bundle_id': '112', 'bundle_name': 'PassMePlz', 'author': 'gandu mara',
+                              'bundle_desc': 'Gand mari Meri', 'bundle_link': 'www.lalal.com',
+                              'bundle_downloads': 13, 'bundle_rating': 3.67}],
+                 'files': [{'file_id': '11', 'filename': 'gobar', 'author': 'lodaSingh', 'format': 'PDF',
+                            'file_link': 'www.dd.com', 'file_rating': 4}],
+                 'video_links': ['www.dd.com']}
+    Mongo.addSub(MongoItem)
     return render_template('downloads.html', user=username)
 
 
@@ -38,15 +50,25 @@ def upload(username):
         return "GET: uploads"
 
 
-@app.route("/pages")
-@app.route("/pages/<pageID>")
-def page(pageID=None):
-    return render_template('sub-page.html', pageID=pageID)
+@app.route("/subjects")
+@app.route("/subjects/<int:subjectID>", methods=['GET', 'POST'])
+def subjects(subjectID=None):
+    if subjectID:
+        return render_template('sub-page.html', sub=Mongo.subdesc(subjectID))
+    else:
+        return render_template('sub-list-page.html', subList=SQL['subjects'])
 
 
-@app.route('/namecheck', methods=['POST'])
-def check():
-    return True
+@app.route('/contribute/<int:subID>')
+def contribute(subID=None):
+    return "Nice" + str(subID)
+
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('username', None)
+    flash("Logged Out")
+    return redirect(url_for('index'))
 
 
 # SOCKET HANDLERS
@@ -55,7 +77,7 @@ def signup(data):
     if Mongo.checkUser(data[0]):
         # try:
         x = Hasher.build(data[0], data[2], app.secret_key)
-        Mongo.insert('source_credentials', {"user": x[0], "password": x[1], "mail": data[1]})
+        Mongo.addUser({"user": x[0], "password": x[1], "mail": data[1]})
         session['user'] = x[0]
         return emit('signedup', jsonify(bool=True, msg='Signed-Up'), json=True)
     else:
@@ -64,7 +86,6 @@ def signup(data):
 
 @socketio.on('login')
 def login(data):
-    print('1')
     re = Mongo.getUser(data[0])
     if re:
         if Hasher.retrive(app.secret_key, data[0], data[1], re[1]):
@@ -91,8 +112,8 @@ def search(data):
     obj = Search(data)
     dat = obj.search()
     if dat is not None:
-        print(dat)
-        return emit('objects', dat, json =True)
+        obj.terminate()
+        return emit('objects', dat, json=True)
 
 
 # ERROR HANDLERS
@@ -107,4 +128,4 @@ def er500(e):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

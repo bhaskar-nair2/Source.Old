@@ -12,11 +12,22 @@
 <body>
 {% set navigation_bar = [
     ('/', 'index', 'Search'),
-    ('/downloads', 'downloads', 'Downloads'),
-    ('/pages','subjects','Subjects'),
-    ('/stats', 'stats', 'Stats')
+    ('/subjects','subjects','Subjects'),
+    ('/downloads', 'downloads', 'Uploads'),
+    ('/stats', 'stats', 'Requests')
 ] -%}
 {% set active_page = active_page|default('index') -%}
+
+<!-- Preloader Square
+
+<div class="cssload-thecube">
+	<div class="cssload-cube cssload-c1"></div>
+	<div class="cssload-cube cssload-c2"></div>
+	<div class="cssload-cube cssload-c4"></div>
+	<div class="cssload-cube cssload-c3"></div>
+</div>
+
+-->
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ url_for('index') }}">S</a>

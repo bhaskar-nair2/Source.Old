@@ -9,13 +9,21 @@
 {% block content %}
 
     <div class="sub-page-top">
-        <h3 class="sub-id">CS203</h3>
-        <h1 class="sub-name">Machine Learning</h1>
+        <h3 class="sub-id">{{ sub['sub_code'] }}</h3>
+        <h1 class="sub-name">{{ sub['sub_name'] }}</h1>
         <span class="redirects">Redirects from:<br></span>
-        <p class="re-code">12CS203, 13CS203, 14CS203, 15CS203, 16CS203</p>
+        <p class="re-code">
+            {% for x in sub['redirect_codes'] %}
+                {{ x }}
+            {% endfor %}
+        </p>
         <span class="redirects">Known Teachers:<br></span>
-        <p class="re-code">Ramraj, Joseph James LOL, Nagalakshmi, Punita, Sunita , Hunit, Sunita , Hunita, Gunita,
-            Munita, Chunita, Sunita , Hunita, Gunita, Munita, Chunita, Sunita , Hunita, Gunita, Munita, Chunita</p>
+        <p class="re-code">
+            {% for t in  sub['teachers'] %}
+                {{ t }}
+            {% endfor %}
+        </p>
+    <a href="{{ url_for('contribute',subID= sub['sub_id']) }}" style="color: #0c5460;font-size: 2vh">Contribute..</a>
     </div>
 
     <div class="bundles">
@@ -26,91 +34,38 @@
             </sup>
         </h2>
         <div class="card-holder">
-
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 1-5 Bundle <span class="badge badge-danger">Fav</span></h3>
-                    <h6 class="card-title">Author <span class="rep">:180</span></h6>
-                    <p class="card-text">Some description about the bundle, best to put the file names here and be done
-                        with it.. Can do something more interesting too tho!</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(3) %}
-                            <i class="fa fa-1x fa-star" style="color: gold"></i>
-                        {% endfor %}
-                        {% for x in range(1) %}
-                            <i class="fa fa-1x fa-star-half" style="color: gold"></i>
-                        {% endfor %}
+            {% for bundle in sub['bundles'] %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ bundle['bundle_name'] }}
+                            {% if bundle['bundle_rating']>3 %}
+                                <span class="badge badge-danger">Fav</span>
+                            {% endif %}
+                        </h3>
+                        <h6 class="card-title">{{ bundle['author'] }} <span class="rep">:180</span></h6>
+                        <p class="card-text">{{ bundle['bundle_desc'] }}</p>
+                        <a class="card-link"
+                           href="{{ bundle['bundle_link'] }}">Download:</a>{#    TODO: ADD an onclick which will increase the download count!!#}
+                        <span>{{ bundle['bundle_downloads'] }}</span>
+                        <sup><i class="fa fa-1x fa-question-circle" data-toggle="tooltip"
+                                title="Total Downloads"></i></sup>
+                        <br>
+                        <span>
+                            {% for _ in range((bundle['bundle_rating'] | int)) %}
+                                <i class="fa fa-1x fa-star" style="color: gold"></i>
+                            {% endfor %}
+                            {% if  (bundle['bundle_rating'] | int)<(bundle['bundle_rating'] | round | int) %}
+                                <i class="fa fa-1x fa-star-half" style="color: gold"></i>
+                            {% endif %}
                     </span>
-                    <br>
-                    {% if session['user'] %}
-                        <i class="fa fa-2x fa-thumbs-up"></i>
-                        <i class="fa fa-2x fa-thumbs-down"></i>
-                    {% endif %}
+                        <br>
+                        {#                        {% if session['user'] %}#}
+                        {#                            <i class="fa fa-2x fa-thumbs-up"></i>#}
+                        {#                            <i class="fa fa-2x fa-thumbs-down"></i>#}
+                        {#                        {% endif %}#}
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 1 Bundle</h3>
-
-                    <h6 class="card-title">SuperUser <span class="rep">:1.5K</span></h6>
-                    <p class="card-text">Some description about the bundle, best to put the file names here and be done
-                        with it.. Can do something more interesting too tho!</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(5) %}
-                            <i class="fa fa-1x fa-star" style="color: gold"></i>
-                        {% endfor %}
-                    </span>
-
-                    <br>
-                    <i class="fa fa-2x fa-thumbs-up"></i>
-                    <i class="fa fa-2x fa-thumbs-down"></i>
-
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 2 Bundle <span class="badge badge-primary">New</span></h3>
-                    <h6 class="card-title">DunkinDoughnuts <span class="rep">:180</span></h6>
-                    <p class="card-text">Some description about the bundle, best to put the file names here and be done
-                        with it.. Can do something more interesting too tho!</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(3) %}
-                            <i class="fa fa-1x fa-star" style="color: gold"></i>
-                        {% endfor %}
-                        {% for x in range(1) %}
-                            <i class="fa fa-1x fa-star-half" style="color: gold"></i>
-                        {% endfor %}
-                    </span>
-                    <br>
-                    <i class="fa fa-2x fa-thumbs-up"></i>
-                    <i class="fa fa-2x fa-thumbs-down"></i>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 3 Bundle</h3>
-                    <h6 class="card-title">Author <span class="rep">:180</span></h6>
-                    <p class="card-text">Some description about the bundle, best to put the file names here and be done
-                        with it.. Can do something more interesting too tho!</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(3) %}
-                            <i class="fa fa-1x fa-star" style="color: gold"></i>
-                        {% endfor %}
-                        {% for x in range(1) %}
-                            <i class="fa fa-1x fa-star-half" style="color: gold"></i>
-                        {% endfor %}
-                    </span>
-                    <br>
-                    <i class="fa fa-2x fa-thumbs-up"></i>
-                    <i class="fa fa-2x fa-thumbs-down"></i>
-                </div>
-            </div>
-
-
+            {% endfor %}
         </div>
     </div>
 
@@ -121,44 +76,24 @@
             </sup>
         </h2>
         <div class="card-holder">
-
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 1</h3>
-                    <h6 class="card-title">Author <span class="rep">:180</span></h6>
-                    <p class="card-text">Format: PPTX</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(3) %}
+            {% for file in sub['files'] %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ file['filename'] }}</h3>
+                        <h6 class="card-title">{{ file['author'] }} <span class="rep">:180</span></h6>
+                        <p class="card-text">Format: {{ file['format'] }}</p>
+                        <a class="card-link" href="{{ file['file_link'] }}">Download</a>
+                        <span>
+                        {% for _ in range((file['file_rating'] | int)) %}
                             <i class="fa fa-1x fa-star" style="color: gold"></i>
                         {% endfor %}
-                        {% for x in range(1) %}
-                            <i class="fa fa-1x fa-star-half" style="color: gold"></i>
-                        {% endfor %}
+                        {% if  (file['file_rating'] | int)<(file['file_rating'] | round | int) %}
+                                <i class="fa fa-1x fa-star-half" style="color: gold"></i>
+                            {% endif %}
                     </span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Unit 2
-                        <sup>
-                            <i class="fa fa-1x fa-question-circle" data-toggle="tooltip" title="Individual Files"></i>
-                        </sup>
-                    </h3>
-                    <h6 class="card-title">Author <span class="rep">:180</span></h6>
-                    <p class="card-text">Format: PDF</p>
-                    <a class="card-link" href="#">Download</a>
-                    <span>
-                        {% for x in range(3) %}
-                            <i class="fa fa-1x fa-star" style="color: gold"></i>
-                        {% endfor %}
-                        {% for x in range(1) %}
-                            <i class="fa fa-1x fa-star-half" style="color: gold"></i>
-                        {% endfor %}
-                    </span>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </div>
@@ -170,17 +105,17 @@
             </sup>
         </h2>
         <div class="embedded">
-            <iframe class="embededVideo" src="https://www.youtube.com/embed/avLxcVkPgug?rel=0&amp;controls=0"
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-            <iframe class="embededVideo" src="https://www.youtube.com/embed/avLxcVkPgug?rel=0&amp;controls=0"
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-            <iframe class="embededVideo" src="https://www.youtube.com/embed/avLxcVkPgug?rel=0&amp;controls=0"
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-            <iframe class="embededVideo" src="https://www.youtube.com/embed/l7n4K12EjY0?rel=0&amp;controls=0"
-                    frameborder="0" allowfullscreen></iframe>
+            {#            <iframe class="embededVideo" src="https://www.youtube.com/embed/avLxcVkPgug?rel=0&amp;controls=0"#}
+            {#                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>#}
+            {##}
+            {#            <iframe class="embededVideo" src="https://www.youtube.com/embed/avLxcVkPgug?rel=0&amp;controls=0"#}
+            {#                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>#}
+            {##}
+            {#            <iframe class="embededVideo" src="https://www.youtube.com/embed/BHS0H5AwGjU?rel=0&amp;controls=0"#}
+            {#                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>#}
+            {##}
+            {#            <iframe class="embededVideo" src='https://www.youtube.com/embed/joOc4KfmcXE?rel=0&amp;controls=0'#}
+            {#                    frameborder="0" allowfullscreen></iframe>#}
 
 
         </div>

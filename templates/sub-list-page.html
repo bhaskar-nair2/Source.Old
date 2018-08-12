@@ -1,0 +1,26 @@
+{% if session['user'] %}
+    {% extends 'layout-loggedin.html' %}
+{% else %}
+    {% extends 'layout-main.html' %}
+{% endif %}
+
+{% set active_page = "subjects" %}
+
+{% block content %}
+
+    <div class="sub-list-top">
+        <h1 class="sub-list-title">Subjects</h1>
+    </div>
+
+    <div class="sub-list-items">
+    {% for sub in subList %}
+        <div class="sub-list-item">
+            <a class="sub-item-head" href="{{ url_for('subjects',subjectID=sub[0]) }}">{{ sub[1] }}</a><br>
+            <span class="sub-list-dept">Subject Code:</span>
+            <p>{{ sub[2] }}</p>
+         <span class="sub-list-dept">Department:</span>
+            <p>{{ sub[3] }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
